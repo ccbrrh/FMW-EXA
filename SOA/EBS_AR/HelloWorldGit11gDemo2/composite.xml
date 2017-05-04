@@ -17,7 +17,7 @@
     <interface.wsdl interface="http://xmlns.oracle.com/GitDemo11gApp/HelloWorldGit11gDemo2/HelloWorldGit11gDemo2#wsdl.interface(HelloWorldGit11gDemo2)"/>
     <binding.ws port="http://xmlns.oracle.com/GitDemo11gApp/HelloWorldGit11gDemo2/HelloWorldGit11gDemo2#wsdl.endpoint(helloworldgit11gdemo2_client_ep/HelloWorldGit11gDemo2_pt)"/>
   </service>
-  <property name="productVersion" type="xs:string" many="false">11.1.1.7.8</property>
+  <property name="productVersion" type="xs:string" many="false">11.1.1.7.7</property>
   <component name="HelloWorldGit11gDemo2" version="1.1">
     <implementation.bpel src="HelloWorldGit11gDemo2.bpel"/>
     <property name="bpel.config.transaction" type="xs:string" many="false">required</property>
