@@ -15,7 +15,9 @@
                xmlns:client="http://xmlns.oracle.com/GitDemo11gApp/HelloWorldGit11gDemo2/HelloWorldGit11gDemo2"
                xmlns:ora="http://schemas.oracle.com/xpath/extension"
                xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
-         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/">
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable">
 
     <!-- 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,6 +46,7 @@
 
     <!-- Reference to the message that will be returned to the requester-->
     <variable name="outputVariable" messageType="client:HelloWorldGit11gDemo2ResponseMessage"/>
+    <variable name="number" type="xsd:string"/>
   </variables>
 
   <!-- 
@@ -57,7 +60,13 @@
 
     <!-- Receive input from requestor. (Note: This maps to operation defined in HelloWorldGit11gDemo2.wsdl) -->
     <receive name="receiveInput" partnerLink="helloworldgit11gdemo2_client" portType="client:HelloWorldGit11gDemo2" operation="process" variable="inputVariable" createInstance="yes"/>
-
+    <assign name="Assing_number">
+      <copy>
+        <from variable="inputVariable" part="payload"
+              query="/client:process/client:input"/>
+        <to variable="number"/>
+      </copy>
+    </assign>
     <!-- Generate reply to synchronous request -->
     <reply name="replyOutput" partnerLink="helloworldgit11gdemo2_client" portType="client:HelloWorldGit11gDemo2" operation="process" variable="outputVariable"/>
   </sequence>

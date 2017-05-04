@@ -60,6 +60,7 @@
       <string v="oracle.toplink.workbench.addin/toplinkContentSet"/>
    </list>
    <value n="defaultPackage" v="helloworldgit11gdemo2"/>
+   <url n="HelloWorldGit11gDemo2_bpelFileURL" path="HelloWorldGit11gDemo2.bpel"/>
    <value n="HelloWorldGit11gDemo2_Namespace" v="http://xmlns.oracle.com/GitDemo11gApp/HelloWorldGit11gDemo2/HelloWorldGit11gDemo2"/>
    <value n="HelloWorldGit11gDemo2_ProcessName" v="HelloWorldGit11gDemo2"/>
    <value n="HelloWorldGit11gDemo2_Template" v="BPEL_SYNC_PROCESS"/>
