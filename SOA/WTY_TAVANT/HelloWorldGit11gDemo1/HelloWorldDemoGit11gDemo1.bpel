@@ -15,7 +15,25 @@
                xmlns:client="http://xmlns.oracle.com/GitDemo11gApp/HelloWorldGit11gDemo1/HelloWorldDemoGit11gDemo1"
                xmlns:ora="http://schemas.oracle.com/xpath/extension"
                xmlns:bpelx="http://schemas.oracle.com/bpel/extension"
-         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/">
+         xmlns:bpws="http://schemas.xmlsoap.org/ws/2003/03/business-process/"
+         xmlns:xsd="http://www.w3.org/2001/XMLSchema"
+         xmlns:getasyncp="http://www.oracle.com/XSL/Transform/java/com.irco.fmw.utility.GetAsyncParent"
+         xmlns:ircoutil="http://www.oracle.com/XSL/Transform/java/com.irco.fmw.utility"
+         xmlns:xp20="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.Xpath20"
+         xmlns:ircifr="http://www.oracle.com/XSL/Transform/java/com.irco.fmw.utility.CreateIfaceRecord"
+         xmlns:bpel2="http://docs.oasis-open.org/wsbpel/2.0/process/executable"
+         xmlns:oraext="http://www.oracle.com/XSL/Transform/java/oracle.tip.pc.services.functions.ExtFunc"
+         xmlns:dvm="http://www.oracle.com/XSL/Transform/java/oracle.tip.dvm.LookupValue"
+         xmlns:hwf="http://xmlns.oracle.com/bpel/workflow/xpath"
+         xmlns:irgifr="http://www.oracle.com/XSL/Transform/java/com.irco.fmw.utility.GetIfaceRecord"
+         xmlns:ids="http://xmlns.oracle.com/bpel/services/IdentityService/xpath"
+         xmlns:bpm="http://xmlns.oracle.com/bpmn20/extensions"
+         xmlns:iruperr="http://www.oracle.com/XSL/Transform/java/com.irco.fmw.utility.UpdateErrorRec"
+         xmlns:iruif="http://www.oracle.com/XSL/Transform/java/com.irco.fmw.utility.UpdateIfaceStatus"
+         xmlns:xdk="http://schemas.oracle.com/bpel/extension/xpath/function/xdk"
+         xmlns:xref="http://www.oracle.com/XSL/Transform/java/oracle.tip.xref.xpath.XRefXPathFunctions"
+         xmlns:irgsvurl="http://www.oracle.com/XSL/Transform/java/com.irco.fmw.utility.GetServiceURL"
+         xmlns:ldap="http://schemas.oracle.com/xpath/extension/ldap">
 
     <!-- 
       ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
@@ -44,6 +62,7 @@
 
     <!-- Reference to the message that will be returned to the requester-->
     <variable name="outputVariable" messageType="client:HelloWorldDemoGit11gDemo1ResponseMessage"/>
+    <variable name="name" type="xsd:string"/>
   </variables>
 
   <!-- 
@@ -57,7 +76,12 @@
 
     <!-- Receive input from requestor. (Note: This maps to operation defined in HelloWorldDemoGit11gDemo1.wsdl) -->
     <receive name="receiveInput" partnerLink="helloworlddemogit11gdemo1_client" portType="client:HelloWorldDemoGit11gDemo1" operation="process" variable="inputVariable" createInstance="yes"/>
-
+    <assign name="Assing_name">
+      <copy>
+        <from expression="concat(&quot;hello&quot;,bpws:getVariableData('inputVariable','payload','/client:process/client:input'))"/>
+        <to variable="name"/>
+      </copy>
+    </assign>
     <!-- Generate reply to synchronous request -->
     <reply name="replyOutput" partnerLink="helloworlddemogit11gdemo1_client" portType="client:HelloWorldDemoGit11gDemo1" operation="process" variable="outputVariable"/>
   </sequence>
